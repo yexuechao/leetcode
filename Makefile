@@ -1,6 +1,6 @@
 ####################################################
 # Generic makefile - 万能Makefile
-# for compiling and linking C++ projects on Linux 
+# for compiling and linking C++ projects on Linux
 # Author: George Foot  Modified:Jackie Lee
 ####################################################
 ### Customising
@@ -14,16 +14,16 @@
 EXECUTABLE := test    # 可执行文件名
 LIBDIR:=              # 静态库目录
 LIBS :=               # 静态库文件名
-INCLUDES:=.           # 头文件目录
+INCLUDES:=.          # 头文件目录
 SRCDIR:=              # 除了当前目录外，其他的源代码文件目录
 #
 # # Now alter any implicit rules' variables if you like, e.g.:
 
-CC := clang++
-CFLAGS := 
+CC := g++
+CFLAGS :=
 CPPFLAGS := $(CFLAGS)
 CPPFLAGS += $(addprefix -I,$(INCLUDES))
-CPPFLAGS += 
+CPPFLAGS += -std=c++11
 #
 # # The next bit checks to see whether rm is in your djgpp bin
 # # directory; if not it uses del instead, but this can cause (harmless)
@@ -69,5 +69,5 @@ endif
 
 $(EXECUTABLE) : veryclean $(SRCS)
 
-	@$(CC) -o $(EXECUTABLE) $(SRCS) $(addprefix -L,$(LIBDIR)) $(addprefix -l,$(LIBS))
+	@$(CC) -o $(EXECUTABLE) $(SRCS) $(addprefix -L,$(LIBDIR)) $(addprefix -l,$(LIBS)) $(CPPFLAGS)
 	@$(RM-F) *.o *.d
